@@ -44,6 +44,7 @@ fun IMCScreen(modifier: Modifier = Modifier, navController: NavController) {
 
     var peso = remember { mutableStateOf("") }
     var altura = remember { mutableStateOf("") }
+    var nome = remember { mutableStateOf("") }
     var imc = remember { mutableStateOf(0.0) }
     var statusImc = remember { mutableStateOf("") }
 
@@ -54,31 +55,6 @@ fun IMCScreen(modifier: Modifier = Modifier, navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            // ---- header ---------
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(180.dp)
-                    .background(colorResource(id = R.color.teal_700))
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                    contentDescription = "logo",
-                    modifier = Modifier
-                        .size(100.dp)
-                        .padding(top = 16.dp)
-                )
-                Text(
-                    text = "Calculadora IMC",
-                    fontSize = 24.sp,
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 12.dp, bottom = 24.dp)
-                )
-
-            }
-            // --- formulário
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -86,21 +62,25 @@ fun IMCScreen(modifier: Modifier = Modifier, navController: NavController) {
             ) {
                 Card(
                     modifier = Modifier
-                        .offset(y = (-30).dp)
                         .fillMaxWidth(),
-                    //.height(300.dp),
-                    colors = CardDefaults
-                        .cardColors(containerColor = Color(0xfff9f6f6)),
-                    elevation = CardDefaults.cardElevation(4.dp)
                 ) {
                     Column(modifier = Modifier.padding(24.dp)) {
+                        Spacer(modifier = Modifier.height(16.dp))
                         Text(
-                            text = "Seus dados",
+                            text = "Seu nome",
+                            modifier = Modifier.padding(bottom = 8.dp),
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Normal,
+                            color = Color.Red
+                        )
+                        OutlinedTextField(
+                            value = nome.value,
+                            onValueChange = { nome.value = it },
                             modifier = Modifier.fillMaxWidth(),
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = colorResource(id = R.color.teal_700),
-                            textAlign = TextAlign.Center
+                            colors = OutlinedTextFieldDefaults.colors(
+                                unfocusedBorderColor = Color.Red,
+                                focusedBorderColor = Color.Red
+                            )
                         )
                         Spacer(modifier = Modifier.height(32.dp))
                         Text(
@@ -114,15 +94,10 @@ fun IMCScreen(modifier: Modifier = Modifier, navController: NavController) {
                             value = peso.value,
                             onValueChange = { peso.value = it },
                             modifier = Modifier.fillMaxWidth(),
-                            placeholder = {
-                                Text(text = "Seu peso em Kg.")
-                            },
                             colors = OutlinedTextFieldDefaults.colors(
-                                unfocusedBorderColor = colorResource(id = R.color.teal_700),
-                                focusedBorderColor = colorResource(id = R.color.teal_700)
-                            ),
-                            shape = RoundedCornerShape(16.dp),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                unfocusedBorderColor = Color.Red,
+                                focusedBorderColor = Color.Red
+                            )
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
@@ -136,19 +111,9 @@ fun IMCScreen(modifier: Modifier = Modifier, navController: NavController) {
                             value = altura.value,
                             onValueChange = { altura.value = it },
                             modifier = Modifier.fillMaxWidth(),
-                            placeholder = {
-                                Text(
-                                    text = "Sua altura em cm."
-                                )
-                            },
                             colors = OutlinedTextFieldDefaults.colors(
-                                unfocusedBorderColor = colorResource(id = R.color.teal_700),
-                                focusedBorderColor = colorResource(id = R.color.teal_700)
-                            ),
-                            shape = RoundedCornerShape(16.dp),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType =
-                                    KeyboardType.Decimal
+                                unfocusedBorderColor = Color.Red,
+                                focusedBorderColor = Color.Red
                             )
                         )
                         Spacer(modifier = Modifier.height(16.dp))
@@ -165,8 +130,7 @@ fun IMCScreen(modifier: Modifier = Modifier, navController: NavController) {
                                 .height(48.dp),
                             shape = RoundedCornerShape(16.dp),
                             colors = ButtonDefaults.buttonColors(
-                                containerColor =
-                                    colorResource(id = R.color.teal_700)
+                                containerColor = Color.Green
                             )
                         ) {
                             Text(
@@ -177,39 +141,49 @@ fun IMCScreen(modifier: Modifier = Modifier, navController: NavController) {
                             )
                         }
                     }
+
                 }
+
+            }
+            Button(
+                onClick = { navController.navigate("menu") },
+                colors = ButtonDefaults.buttonColors(Color.Green),
+                modifier = modifier.align(Alignment.CenterHorizontally)
+            ) {
+                Text(
+                    text = "Voltar",
+                    fontSize = 20.sp,
+                    color = Color.Red
+                )
             }
         }
-// -- Card Resultado
         Card(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
                 .padding(horizontal = 32.dp, vertical = 24.dp)
-                .align(Alignment.BottomCenter),
-            colors = CardDefaults.cardColors(containerColor = Color(0xff329F6B)),
-            elevation = CardDefaults.cardElevation(4.dp),
-            //border = BorderStroke(width = 1.dp, Color(0xffed145b))
+                .align(Alignment.BottomCenter)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .padding(horizontal = 32.dp)
                     .fillMaxSize()
             ) {
-                Column() {
-                    Text(
-                        text = "Resultado",
-                        color = Color.White,
-                        fontSize = 14.sp
-                    )
-                    Text(
-                        text = statusImc.value,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        fontSize = 20.sp
-                    )
-                }
+                Text(
+                    text = nome.value,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black,
+                    fontSize = 20.sp
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = statusImc.value,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black,
+                    fontSize = 20.sp
+                )
+                Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = String.format("%.1f", imc.value),
                     modifier = Modifier.fillMaxWidth(),

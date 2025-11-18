@@ -2,8 +2,10 @@ package lucaslimb.com.github.gs_android.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -23,32 +25,38 @@ fun EquipeScreen(modifier: Modifier = Modifier, navController: NavController) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFFFA9A9A9))
+            .background(Color.Green)
             .padding(32.dp)
     ) {
-        Text(
-            text = "Lucas de Lima Bezerra - RM 98632",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = "Martin Hilst - RM 99451",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-        )
-        Button(
-            onClick = { navController.navigate("menu") },
-            colors = ButtonDefaults.buttonColors(Color.White),
-            modifier = Modifier.align(Alignment.Center)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center)
         ) {
             Text(
-                text = "Voltar",
-                fontSize = 20.sp,
-                color = Color.Blue
+                text = "Lucas de Lima Bezerra - RM 98632",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
             )
-        }
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Martin Hilst - RM 99451",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+            }
+            Button(
+                onClick = { navController.navigate("menu") },
+                colors = ButtonDefaults.buttonColors(Color.Red),
+                modifier = Modifier.align(Alignment.Center)
+            ) {
+                Text(
+                    text = "Voltar",
+                    fontSize = 20.sp,
+                    color = Color.Green
+                )
+            }
     }
 }

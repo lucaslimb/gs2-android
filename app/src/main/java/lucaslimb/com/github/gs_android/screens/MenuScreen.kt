@@ -26,14 +26,14 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFF2C4EC7))
+            .background(Color.Green)
             .padding(32.dp)
     ) {
         Text(
             text = "MENU",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White
+            color = Color.Red
         )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -43,37 +43,37 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
         ) {
             Button(
                 onClick = { navController.navigate("calculadora") },
-                colors = ButtonDefaults.buttonColors(Color.White),
+                colors = ButtonDefaults.buttonColors(Color.Red),
                 modifier = Modifier.size(width = 200.dp, height = 48.dp)
             ) {
                 Text(
                     text = "Cálculo de IMC",
                     fontSize = 20.sp,
-                    color = Color.Blue
+                    color = Color.White
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = { navController.navigate("equipe") },
-                colors = ButtonDefaults.buttonColors(Color.White),
+                colors = ButtonDefaults.buttonColors(Color.Red),
                 modifier = Modifier.size(width = 200.dp, height = 48.dp)
             ) {
                 Text(
                     text = "Equipe",
                     fontSize = 20.sp,
-                    color = Color.Blue
+                    color = Color.White
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = { navController.navigate("login") },
-                colors = ButtonDefaults.buttonColors(Color.White),
+                colors = ButtonDefaults.buttonColors(Color.Red),
                 modifier = Modifier.size(width = 200.dp, height = 48.dp)
             ) {
                 Text(
                     text = "Voltar",
                     fontSize = 20.sp,
-                    color = Color.Blue
+                    color = Color.White
                 )
             }
         }
